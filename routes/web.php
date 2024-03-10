@@ -16,5 +16,5 @@ use App\Http\Controllers\StudentController;
 Route::resource('students', StudentController::class)->except(['create']);
 
 Route::get('/', function () {
-    return view('welcome');
+    return to_route('students.index');
 });

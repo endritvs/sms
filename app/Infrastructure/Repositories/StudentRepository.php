@@ -24,12 +24,21 @@ class StudentRepository implements StudentRepositoryInterface
 
     public function save(DomainStudent $student): DomainStudent
     {
-        $Student = new Student([
-            'username' => $student->getUsername(),
-            'email' => $student->getEmail(),
-        ]);
-        $Student->save();
-        return new DomainStudent($Student->id, $Student->username, $Student->email);
+        if ($student->id) {
+            $model = Student::find($student->id);
+            $model->update([
+                'username' => $student->username,
+                'email' => $student->email,
+            ]);
+        } else {
+            $model = new Student([
+                'username' => $student->username,
+                'email' => $student->email,
+            ]);
+            $model->save();
+        }
+        
+        return new DomainStudent($model->id, $model->username, $model->email);
     }
 
     public function delete(int $id): void

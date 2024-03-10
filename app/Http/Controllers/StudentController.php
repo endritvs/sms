@@ -22,7 +22,6 @@ class StudentController extends Controller
 
     public function show($id, FetchSingleStudentAction $action)
     {
-        dd($id);
         $student = $action->execute($id);
         return Inertia::render('Students/Show', ['student' => $student]);
     }
@@ -31,20 +30,20 @@ class StudentController extends Controller
     {
         $validated = $request->validated();
         $action->execute($validated);
-        return redirect()->route('students.index');
+        return to_route('students.index');
     }
 
     public function update(UpdateStudentRequest $request, $id, UpdateStudentAction $action)
     {
         $validated = $request->validated();
         $action->execute($id, $validated);
-        return redirect()->route('students.index');
+        return to_route('students.index');
     }
 
     public function destroy($id, DeleteStudentAction $action)
     {
         $action->execute($id);
-        return redirect()->route('students.index');
+        return to_route('students.index');
     }
 }
 

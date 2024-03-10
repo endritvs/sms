@@ -21,9 +21,8 @@ class UpdateStudentAction
         if (!$student) {
             throw new \Exception("Student not found", 404);
         }
-
-        $student->setUsername($data['username']);
-        $student->setEmail($data['email']);
+        $student->setEmail($data['email']); 
+        $student->setUsername($data['username']); 
 
         return $this->studentRepository->save($student);
     }

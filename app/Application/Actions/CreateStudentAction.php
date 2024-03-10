@@ -16,9 +16,11 @@ class CreateStudentAction
 
     public function execute($data): Student
     {
-        $student = new Student();
-        $student->setUsername($data['username']);
-        $student->setEmail($data['email']);
+        $student = new Student(
+            id: null,
+            username: $data['username'],
+            email: $data['email']
+        );
 
         return $this->studentRepository->save($student);
     }
